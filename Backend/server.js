@@ -28,22 +28,37 @@ app.get('/', (req, res) => {
 
 app.post('/', async (req, res) => {
     try {
+        // url is defined within object as string input of object 'req.body' is then assigned to variable url
         const { url } = req.body
+        const click_me = 'Click on the short link to the open the website'
         if(!url){
             throw new Error('Request body is empty')
         }
         const urlExists = await ShortUrl.findOne({ url })
         if (urlExists) {
-            res.render('index', { short_url: `http://localhost:5000/${urlExists.shortid}`})
+            res.render('index', { short_url: `http://localhost:5000/${urlExists.shortid}`, click_me: 'click me' })
             return
         }
         const shortUrl = new ShortUrl({ url: url, shortid: shortid.generate() })
         const result = await shortUrl.save()
-        res.render('index', { short_url: `http://localhost:5000/${result.shortid}`})
+        res.render('index', { short_url: `http://localhost:5000/${result.shortid}`, click_me: 'click me' })
     } catch (error) {
         console.log('An error occurred:', error.message);        
     }
 
+})
+
+app.get('/:shortid', async(req, res) => {
+    try {
+        const { shortid } = req.params
+        const result = await ShortUrl.findOne({ shortid: shortid })
+        if(!result){
+            throw new Error('No url exists')
+        }
+        res.redirect(result.url)
+    } catch (error) {
+        console.log('An error occurred:', error.message);        
+    }
 })
 
 // Error handling

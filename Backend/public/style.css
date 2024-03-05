@@ -101,6 +101,10 @@ button:focus-visible {
   color: tomato;
 }
 
+.short-url p .click_me{
+  color: #ffffff;
+}
+
 .short-url button{
   height: 2.5rem;
   font-size: 0.85rem;
