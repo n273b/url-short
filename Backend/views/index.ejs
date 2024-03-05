@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url shortener</title>
+</head>
+<body>
+    <div class='inputContainer'>
+        <div class="error">
+            <% if (locals.error) { %>
+                <p><%= error %></p>
+            <% } %>
+        </div>
+        <h1>URL <span>Shortener</span></h1>
+        <form action='/' method='POST'>
+            <input 
+              type="url"
+              name='url'
+              id='url'
+              placeholder='Paste a link to shorten it'
+              required
+            />
+            <button type='submit'>Shorten</button>
+        </form>
+    </div>
+
+    <div class='short-url'>
+        <% if (locals.short_url) { %>
+            <p><%= short_url %></p>
+        <% } %>
+        <button>Copy to clipboard</button>
+    </div>
+</body>
+</html>
