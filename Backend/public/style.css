@@ -65,3 +65,43 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/************ Input Container css ************/
+    
+.inputContainer form{
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.inputContainer h1 span{
+  color: #646cff;
+}
+
+.inputContainer input{
+  width: 100%;
+  padding: 0.5rem 0.2rem 0.5rem 0;
+  text-indent: 0.75rem;
+}
+
+.inputContainer button{
+  height: 3rem;
+  text-transform: uppercase;
+}
+
+/************ Result Container css ************/
+
+.short-url{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.short-url p{
+  color: tomato;
+}
+
+.short-url button{
+  height: 2.5rem;
+  font-size: 0.85rem;
+}
