@@ -99,6 +99,7 @@ button:focus-visible {
 
 .short-url p{
   color: tomato;
+  margin: 2rem;
 }
 
 .short-url p .click_me{
