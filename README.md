@@ -5,7 +5,7 @@ Open the website from the deployed link : ------in progress------
 This is a backend project that offers a url shortening service, which creates a short url for every url posted. It also provides a custom url feature which allows to include a custom string inside the short url. It is made using Node.js, Express, MongoDB, EJS as templating language, and multiple libraries including mongoose, shortid etc.
 
 ## Installation required
-1. Make sure to have an installation of Node.js or download from : https://nodejs.org/en/download
+1. Ensure you have Node.js and NPM installed on your local machine. If not, you can download them from https://nodejs.org/.
 2. Clone the repository using : git clone https://github.com/n273b/url-short.git
 3. Install all dependencies from package.json : npm install
 4. Start the app using : npm start

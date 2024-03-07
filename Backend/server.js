@@ -33,8 +33,10 @@ app.get('/', (req, res) => {
 app.post('/', async (req, res) => {
     try {
         // url is defined within object as string input of object 'req.body' is then assigned to variable url
-        const { url, text } = req.body
-        const textString = JSON.stringify(text);
+        const url = req.body.url
+        const text = req.body.text
+        console.log(text,url)
+        // const textString = JSON.stringify(text);
         if(!url){
             throw new Error('Request body is empty')
         }
@@ -42,11 +44,11 @@ app.post('/', async (req, res) => {
         // If custom shortid is provided
         if (text) {
             // Check if custom shortid already exists
-            const customShortIdExists = await ShortUrl.findOne({ shortid: textString });
+            const customShortIdExists = await ShortUrl.findOne({ shortid: text });
             if (customShortIdExists) {
                 throw new Error('Custom shortid already exists');
             }
-            const shortUrl = new ShortUrl({ url: url, shortid: textString }); // Use custom shortid
+            const shortUrl = new ShortUrl({ url: url, shortid: Text }); // Use custom shortid
             const result = await shortUrl.save();
             res.render('index', { short_url: `http://localhost:5000/${result.shortid}`, click_me: 'click this link' });
         } else {
