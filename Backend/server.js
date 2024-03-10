@@ -3,14 +3,15 @@ const mongoose = require('mongoose')
 const shortid = require('shortid')
 const ShortUrl = require('./models/Url')
 const bodyParser = require('body-parser')
+require('dotenv').config()
 
 const app = express()
 
 // connect to mongodb
-const dbUri = "mongodb+srv://nishthabarnwal273:fuSHtest36@shorturls.fvgwg6d.mongodb.net/Url-shortener?retryWrites=true&w=majority&appName=shortUrls"
-mongoose.connect(dbUri) // returns a promise, hence async   
-    .then((result) => app.listen(5000, () => {
-        console.log("Server is running at port 5000")
+const port = process.env.PORT
+mongoose.connect(process.env.URI) // returns a promise, hence async   
+    .then((result) => app.listen(port, () => {
+        console.log(`Server is running at port ${port}`)
     }))
     .catch((err) => console.log(err))
 
@@ -50,17 +51,17 @@ app.post('/', async (req, res) => {
             }
             const shortUrl = new ShortUrl({ url: url, shortid: Text }); // Use custom shortid
             const result = await shortUrl.save();
-            res.render('index', { short_url: `http://localhost:5000/${result.shortid}`, click_me: 'click this link' });
+            res.render('index', { short_url: `${req.headers.host}/${result.shortid}`, click_me: 'click this link' });
         } else {
             // If no custom shortid provided, generate one
             const shortUrl = new ShortUrl({ url: url, shortid: shortid.generate() });
             const result = await shortUrl.save();
-            res.render('index', { short_url: `http://localhost:5000/${result.shortid}`, click_me: 'click this link' });
+            res.render('index', { short_url: `${req.headers.host}/${result.shortid}`, click_me: 'click this link' });
         }
 
         const urlExists = await ShortUrl.findOne({ url })
         if (urlExists) {
-            res.render('index', { short_url: `http://localhost:5000/${urlExists.shortid}`, click_me: 'click this link' })
+            res.render('index', { short_url: `${req.headers.host}/${urlExists.shortid}`, click_me: 'click this link' })
             return
         }
         // const shortUrl = new ShortUrl({ url: url, shortid: shortid.generate() })
